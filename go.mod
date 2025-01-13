@@ -1,3 +1,3 @@
-module github.com/LamichhaneBibek/go-html
+module github.com/LamichhaneBibek/petpal-go
 
-go 1.22.2
+go 1.23.4
