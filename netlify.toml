@@ -1,7 +1,7 @@
 [build]
-command = "./build.sh"
+command = "chmod +x ./build.sh && ./build.sh"
 functions = "functions"
-publish = "static"
+publish = "assets"
 
 [build.environment]
 GO_IMPORT_PATH = "github.com/LamichhaneBibek/petpal-go"
