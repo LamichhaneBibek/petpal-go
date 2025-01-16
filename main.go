@@ -18,22 +18,20 @@ var (
 func main() {
 	flag.Parse()
 
-	// http.Handle("/static/", http.FileServer(http.Dir("static/")))
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
-	http.HandleFunc("/", homePage)
-	http.HandleFunc("/contact", contactPage)
-	http.HandleFunc("/about", aboutPage)
-	http.HandleFunc("/product", productPage)
-	http.HandleFunc("/product-details", productDetailsPage)
-	http.HandleFunc("/gallery", galleryPage)
-
 	listenger := gateway.ListenAndServe
 	portStr := "n/a"
 
 	if *port != -1 {
 		portStr = fmt.Sprintf(":%d", *port)
 		listenger = http.ListenAndServe
+		http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 	}
+	http.HandleFunc("/", homePage)
+	http.HandleFunc("/contact", contactPage)
+	http.HandleFunc("/about", aboutPage)
+	http.HandleFunc("/product", productPage)
+	http.HandleFunc("/product-details", productDetailsPage)
+	http.HandleFunc("/gallery", galleryPage)
 
 	log.Fatal(listenger(portStr, nil))
 }
@@ -63,7 +61,7 @@ func galleryPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {
-	t, err := template.ParseFiles("templates/" + tmpl)
+	t, err := template.ParseFiles("assets/templates/" + tmpl)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
