@@ -19,7 +19,7 @@ func main() {
 	flag.Parse()
 
 	listenger := gateway.ListenAndServe
-	portStr := "n/a"
+	portStr := ""
 
 	if *port != -1 {
 		portStr = fmt.Sprintf(":%d", *port)
